@@ -7,6 +7,7 @@ import com.example.demoauth.repository.GroupRepository;
 import com.example.demoauth.repository.UserRepository;
 import com.example.demoauth.service.UserService;
 import com.example.demoauth.utils.ApiMessages;
+import com.example.demoauth.utils.JwtUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -36,6 +39,12 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userUpdateDto.getPhoneNumber());
         return userRepository.save(user);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> myUserProfile() {
+        return userRepository.findByUsername(JwtUtil.getUsername());
     }
 
     @Override

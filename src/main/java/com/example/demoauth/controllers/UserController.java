@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +30,13 @@ public class UserController {
     @Operation(summary = "Method to get user profile")
     public ResponseEntity<User> getUserInfo(@RequestParam String username) {
         return ResponseEntity.ok(userService.findByUsername(username));
+    }
+
+    @GetMapping("/me")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @Operation(summary = "Method to get my user profile")
+    public ResponseEntity<Optional<User>> getMyUserInfo() {
+        return ResponseEntity.ok(userService.myUserProfile());
     }
 
     @PutMapping("/profile")
