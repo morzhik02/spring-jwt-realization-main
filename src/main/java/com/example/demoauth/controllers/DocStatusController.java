@@ -1,7 +1,7 @@
 package com.example.demoauth.controllers;
 
-import com.example.demoauth.models.entity.Group;
-import com.example.demoauth.service.GroupService;
+import com.example.demoauth.models.entity.DocStatus;
+import com.example.demoauth.service.DocStatusService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,18 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/groups")
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@Tag(name = "Groups API", description = "Methods for work with groups")
+@RequestMapping("/api/doc_statuses")
+@Tag(name = "Doc statuses API", description = "Methods to work with doc statuses")
 @SecurityRequirement(name = "Bearer Authentication")
-public class GroupController {
-    GroupService groupService;
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+public class DocStatusController {
+    DocStatusService docStatusService;
 
-    @GetMapping
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ADMIN')")
-    @Operation(summary = "Method to get groups list")
-    public ResponseEntity<List<Group>> findAll() {
-        return ResponseEntity.ok(groupService.findAll());
+    @GetMapping()
+    @Operation(summary = "Method to get all doc statuses")
+    public ResponseEntity<List<DocStatus>> getAllDocStatuses() {
+        return ResponseEntity.ok(docStatusService.findAll());
     }
 }
