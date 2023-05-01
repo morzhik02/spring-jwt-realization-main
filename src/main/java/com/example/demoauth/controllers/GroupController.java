@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/groups")
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@Tag(name = "Grouos API", description = "Methods for work with groups")
+@Tag(name = "Groups API", description = "Methods for work with groups")
 @SecurityRequirement(name = "Bearer Authentication")
 public class GroupController {
     GroupService groupService;
