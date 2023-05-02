@@ -1,6 +1,7 @@
 package com.example.demoauth.service.impl;
 
 import com.example.demoauth.exception.DiplomaCoreException;
+import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
@@ -114,6 +115,28 @@ public class DocServiceImpl implements DocService {
         List<DocInfoDto> docInfoDtos = new ArrayList<>();
         List<Doc> docs = docRepository.findAll(docSpec);
         return docInfoDtos;
+    }
+
+    @Override
+    @Transactional
+    public void changeStatus(DocChangeStatusDto docChangeStatusDto) {
+        Doc doc = getDoc(docChangeStatusDto.getId());
+        String statusCode = docChangeStatusDto.getStatusCode().toString();
+        String username = JwtUtil.getUsername();
+        doc.setStatus(docStatusRepository.findByCode(docChangeStatusDto.getStatusCode()));
+        if(statusCode == StatusCode.IN_PROGRESS.toString()){
+            doc.setWorkDate(LocalDateTime.now());
+            doc.setManager(userRepository.getByUsername(username));
+            doc.setLastModifiedBy(username);
+            doc.setLastModifiedDate(LocalDateTime.now());
+        } else if (statusCode == StatusCode.CLOSED.toString()){
+            doc.setClosedDate(LocalDateTime.now());
+            doc.setManager(userRepository.getByUsername(username));
+            doc.setLastModifiedBy(username);
+            doc.setLastModifiedDate(LocalDateTime.now());
+        }
+        docRepository.save(doc);
+
     }
 
     private Doc getDoc(Long id) {

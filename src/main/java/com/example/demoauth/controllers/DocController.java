@@ -1,5 +1,6 @@
 package com.example.demoauth.controllers;
 
+import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.enums.CategoryCode;
@@ -44,5 +45,13 @@ public class DocController {
                     .build();
             docService.save(docCreateDto);
             return ResponseEntity.ok("Doc created successfully");
+    }
+
+    @PatchMapping("/status")
+    @Operation(summary = "Method to change status of docs")
+    public ResponseEntity<String> changeStatusOfDoc(
+            @RequestBody DocChangeStatusDto docChangeStatusDto) {
+        docService.changeStatus(docChangeStatusDto);
+        return ResponseEntity.ok("Doc status changed successfully");
     }
 }

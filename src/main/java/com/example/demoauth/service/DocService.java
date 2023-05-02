@@ -1,5 +1,6 @@
 package com.example.demoauth.service;
 
+import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
@@ -14,6 +15,6 @@ public interface DocService {
     DocInfoDto findById(Long id);
 
     List<DocInfoDto> findAll(DocSearchDto docSearchDto);
-//
-//    void changeStatus(PostChangeStatusDto postChangeStatusDto);
+
+    void changeStatus(DocChangeStatusDto docChangeStatusDto);
 }
