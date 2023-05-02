@@ -13,6 +13,7 @@ import com.example.demoauth.repository.DocRepository;
 import com.example.demoauth.repository.DocStatusRepository;
 import com.example.demoauth.repository.UserRepository;
 import com.example.demoauth.service.DocService;
+import com.example.demoauth.service.EmailService;
 import com.example.demoauth.service.UserService;
 import com.example.demoauth.utils.ApiMessages;
 import com.example.demoauth.utils.JwtUtil;
@@ -45,6 +46,7 @@ public class DocServiceImpl implements DocService {
     UserRepository userRepository;
 
     UserService userService;
+    EmailService emailService;
 
     @Override
     @Transactional
@@ -121,19 +123,48 @@ public class DocServiceImpl implements DocService {
     @Transactional
     public void changeStatus(DocChangeStatusDto docChangeStatusDto) {
         Doc doc = getDoc(docChangeStatusDto.getId());
+        User student = userRepository.getByUsername(doc.getUser().getUsername());
+        String studentEmail = student.getEmail();
+        String docId = docChangeStatusDto.getId().toString();
         String statusCode = docChangeStatusDto.getStatusCode().toString();
         String username = JwtUtil.getUsername();
+        User user = userRepository.getByUsername(username);
+        String managerFullName = "";
+        if(user != null) {
+            managerFullName += user.getLastname() + " " + user.getFirstname() + " " + user.getMidname();
+        }
         doc.setStatus(docStatusRepository.findByCode(docChangeStatusDto.getStatusCode()));
         if(statusCode == StatusCode.IN_PROGRESS.toString()){
             doc.setWorkDate(LocalDateTime.now());
             doc.setManager(userRepository.getByUsername(username));
             doc.setLastModifiedBy(username);
             doc.setLastModifiedDate(LocalDateTime.now());
+            emailService.sendEmail(studentEmail,
+                    "Ваше обращение №" + docId + " взяли в работу",
+                    "Добрый день!\n" +
+                            "\n" +
+                            "Вашего обращения №" + docId + " взято в работу " + managerFullName +
+                            "\n" + "\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "\n" +
+                            "С уважением, менеджер Алиса");
+            log.info("Send in progress message to " + studentEmail);
         } else if (statusCode == StatusCode.CLOSED.toString()){
             doc.setClosedDate(LocalDateTime.now());
             doc.setManager(userRepository.getByUsername(username));
             doc.setLastModifiedBy(username);
             doc.setLastModifiedDate(LocalDateTime.now());
+            emailService.sendEmail(studentEmail,
+                    "Рассмотрение Вашего обращения №" + docId + " завершено",
+                    "Добрый день!\n" +
+                            "\n" +
+                            "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
+                            "Скачать его можно будет в разделе Архив заявок\n" +
+                            "\n" + "\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "\n" +
+                            "С уважением, менеджер Алиса");
+            log.info("Send closed message to " + studentEmail);
         }
         docRepository.save(doc);
 
