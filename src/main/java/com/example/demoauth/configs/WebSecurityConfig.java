@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/test/**").permitAll()
 				.antMatchers("/**").permitAll()
 				.antMatchers(SWAGGER_URLS).permitAll()
-					.antMatchers().access("hasAnyRole('ROLE_ADMIN', 'ROLE_DISTRICT_POLICEMAN', 'ROLE_PROSECUTOR')")
+					//.antMatchers().access("hasAnyRole('ROLE_ADMIN', 'ROLE_DISTRICT_POLICEMAN', 'ROLE_PROSECUTOR')")
 					.anyRequest().authenticated();
 		
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
