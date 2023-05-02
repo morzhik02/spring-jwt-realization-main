@@ -20,13 +20,11 @@ import java.time.LocalDateTime;
 @FieldNameConstants
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Doc extends BaseEntity{
-    String number;
+    //String number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")
     DocStatus status;
-
-    LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id")
