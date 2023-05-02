@@ -52,7 +52,6 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager
@@ -76,7 +75,6 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity<?> registerUser(@RequestBody SignupRequest signupRequest) {
 
 		if (userRespository.existsByUsername(signupRequest.getUsername())) {
