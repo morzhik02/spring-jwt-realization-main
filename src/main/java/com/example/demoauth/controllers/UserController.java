@@ -22,6 +22,7 @@ import java.util.Optional;
 @Tag(name = "Users API", description = "Methods for work with users")
 @SecurityRequirement(name = "Bearer Authentication")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
     UserService userService;
 

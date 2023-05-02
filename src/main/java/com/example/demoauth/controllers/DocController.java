@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Tag(name = "Doc API", description = "Methods to work with doc")
 @SecurityRequirement(name = "Bearer Authentication")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class DocController {
 
     DocService docService;
@@ -36,21 +37,20 @@ public class DocController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "Method to save new post")
+    @Operation(summary = "Method to save new doc")
     public ResponseEntity<String> save(@RequestParam(value = "category") CategoryCode category,
                 @RequestParam(value = "description", required = false) String description) {
-            DocCreateDto docCreateDto = DocCreateDto.builder()
+        DocCreateDto docCreateDto = DocCreateDto.builder()
                     .category(category)
                     .description(description)
                     .build();
-            docService.save(docCreateDto);
-            return ResponseEntity.ok("Doc created successfully");
+        docService.save(docCreateDto);
+        return ResponseEntity.ok("Doc created successfully");
     }
 
     @PatchMapping("/status")
     @Operation(summary = "Method to change status of docs")
-    public ResponseEntity<String> changeStatusOfDoc(
-            @RequestBody DocChangeStatusDto docChangeStatusDto) {
+    public ResponseEntity<String> changeStatusOfDoc(@RequestBody DocChangeStatusDto docChangeStatusDto) {
         docService.changeStatus(docChangeStatusDto);
         return ResponseEntity.ok("Doc status changed successfully");
     }
