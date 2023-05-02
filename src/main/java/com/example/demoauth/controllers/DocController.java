@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +31,7 @@ public class DocController {
     DocService docService;
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get doc with Id")
     public ResponseEntity<DocInfoDto> getDoc(
             @Parameter(description = "Doc id", example = "1", required = true) @PathVariable Long id) {
@@ -37,6 +39,7 @@ public class DocController {
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to save new doc")
     public ResponseEntity<String> save(@RequestParam(value = "category") CategoryCode category,
                 @RequestParam(value = "description", required = false) String description) {
@@ -49,6 +52,7 @@ public class DocController {
     }
 
     @PatchMapping("/status")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to change status of docs")
     public ResponseEntity<String> changeStatusOfDoc(@RequestBody DocChangeStatusDto docChangeStatusDto) {
         docService.changeStatus(docChangeStatusDto);

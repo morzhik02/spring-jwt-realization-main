@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class EmailController {
     EmailService emailService;
 
     @PostMapping("/send")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to send email")
     public ResponseEntity sendEmail(@RequestBody EmailMessageResponse emailMessageResponse){
         emailService.sendEmail(emailMessageResponse.getTo(), emailMessageResponse.getSubject(), emailMessageResponse.getMessage());
