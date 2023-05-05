@@ -1,6 +1,7 @@
 package com.example.demoauth.service.impl;
 
 import com.example.demoauth.exception.DiplomaCoreException;
+import com.example.demoauth.models.dto.UserMeProfileDto;
 import com.example.demoauth.models.dto.UserUpdateDto;
 import com.example.demoauth.models.entity.User;
 import com.example.demoauth.repository.GroupRepository;
@@ -45,6 +46,28 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Optional<User> myUserProfile() {
         return userRepository.findByUsername(JwtUtil.getUsername());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserMeProfileDto meProfile() {
+        UserMeProfileDto userMe = new UserMeProfileDto();
+        String username = JwtUtil.getUsername();
+        User user = userRepository.findByUsername(username).get();
+        userMe.setFirstname(user.getFirstname());
+        userMe.setLastname(user.getLastname());
+        userMe.setMidname(user.getMidname());
+        userMe.setPhoneNumber(user.getPhoneNumber());
+        userMe.setEmail(user.getEmail());
+        userMe.setGroup(user.getGroup().getName());
+        User head = user.getHead();
+        if (head != null){
+            userMe.setHeadFullName(head.getLastname() + " "
+                                + head.getFirstname() + " "
+                                + head.getMidname());
+        }
+        userMe.setRoles(user.getRoles());
+        return userMe;
     }
 
     @Override

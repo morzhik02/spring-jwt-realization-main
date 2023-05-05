@@ -1,5 +1,6 @@
 package com.example.demoauth.controllers;
 
+import com.example.demoauth.models.dto.UserMeProfileDto;
 import com.example.demoauth.models.dto.UserUpdateDto;
 import com.example.demoauth.models.entity.User;
 import com.example.demoauth.service.UserService;
@@ -33,11 +34,18 @@ public class UserController {
         return ResponseEntity.ok(userService.findByUsername(username));
     }
 
+//    @GetMapping("/me")
+//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+//    @Operation(summary = "Method to get my user profile")
+//    public ResponseEntity<Optional<User>> getMyUserInfo() {
+//        return ResponseEntity.ok(userService.myUserProfile());
+//    }
+
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get my user profile")
-    public ResponseEntity<Optional<User>> getMyUserInfo() {
-        return ResponseEntity.ok(userService.myUserProfile());
+    public ResponseEntity<UserMeProfileDto> getMyUserInfo() {
+        return ResponseEntity.ok(userService.meProfile());
     }
 
     @PutMapping("/profile")
