@@ -87,9 +87,16 @@ public class DocServiceImpl implements DocService {
         User user = doc.getUser();
         if(user != null) {
             docInfoDto.setUser(doc.getUser().getLastname() + " " + doc.getUser().getFirstname() + " " + doc.getUser().getMidname());
+            docInfoDto.setFaculty(doc.getUser().getFaculty().getName());
+            docInfoDto.setProgram(doc.getUser().getProgram().getName());
+            docInfoDto.setStudentIIN(doc.getUser().getStud_iin());
+            docInfoDto.setStudFirstName(doc.getUser().getFirstname());
+            docInfoDto.setStudLastName(doc.getUser().getLastname());
+            docInfoDto.setStudMidName(doc.getUser().getMidname());
         }
         docInfoDto.setWorkDate(doc.getWorkDate());
         docInfoDto.setClosedDate(doc.getClosedDate());
+
         return docInfoDto;
     }
 
@@ -147,7 +154,7 @@ public class DocServiceImpl implements DocService {
                             "\n" + "\n" +
                             "Это письмо создано автоматически. Отвечать на него не нужно\n" +
                             "\n" +
-                            "С уважением, менеджер Алиса");
+                            "С уважением, Ваш универ");
             log.info("Send in progress message to " + studentEmail);
         } else if (statusCode == StatusCode.CLOSED.toString()){
             doc.setClosedDate(LocalDateTime.now());
@@ -163,7 +170,7 @@ public class DocServiceImpl implements DocService {
                             "\n" + "\n" +
                             "Это письмо создано автоматически. Отвечать на него не нужно\n" +
                             "\n" +
-                            "С уважением, менеджер Алиса");
+                            "С уважением, Ваш универ");
             log.info("Send closed message to " + studentEmail);
         }
         docRepository.save(doc);

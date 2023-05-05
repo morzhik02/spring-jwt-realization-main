@@ -30,8 +30,26 @@ public class DocInfoDto {
     @Schema(description = "Doc user fullname", example = "Izteleu Marzhan Assylkhankyzy")
     String user;
 
+    @Schema(description = "Doc user firstName", example = "Marzhan")
+    String studFirstName;
+
+    @Schema(description = "Doc user lastName", example = "Izteleu")
+    String studLastName;
+
+    @Schema(description = "Doc user midName", example = "Assylkhankyzy")
+    String studMidName;
+
     @Schema(description = "Doc manager fullname", example = "Izteleu Marzhan Assylkhankyzy")
     String manager;
+
+    @Schema(description = "Doc student iin", example = "020421600130")
+    String studentIIN;
+
+    @Schema(description = "Doc student faculty", example = "Факультет цифровых трансформаций")
+    String faculty;
+
+    @Schema(description = "Doc student educational program", example = "Информационные системы")
+    String program;
 
     @Schema(description = "Doc to work date", example = "29-03-2022 16:43")
     LocalDateTime workDate;

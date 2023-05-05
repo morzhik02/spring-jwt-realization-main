@@ -32,6 +32,18 @@ public class User extends BaseEntity{
 	String lastname;
 	String midname;
 	String phoneNumber;
+	String stud_iin;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "faculty_id")
+	UserFaculty faculty;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "program_id")
+	EducationalProgram program;
+
+	String admissionYear;
+	String graduationYear;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")

@@ -27,7 +27,7 @@ public class Doc extends BaseEntity{
     DocStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_id")
+    @JoinColumn(name = "category_id")
     DocCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,5 +48,7 @@ public class Doc extends BaseEntity{
 
     LocalDateTime closedDate;
     LocalDateTime workDate;
+
+
 
 }
