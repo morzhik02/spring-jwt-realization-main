@@ -26,6 +26,9 @@ public class UserMeProfileDto {
     @Schema(description = "User midname", example = "Assylkhankyzy")
     String midname;
 
+    @Schema(description = "User fullname", example = "Izteleu Marzhan Assylkhankyzy")
+    String user;
+
     @Schema(description = "User phone number", example = "+77005553535")
     @Size(min = 12, max = 12, message = "Phone Number Should Be Valid")
     String phoneNumber;
@@ -41,6 +44,12 @@ public class UserMeProfileDto {
 
     @Schema(description = "User stud IIN", example = "020421600130")
     String studIIN;
+
+    @Schema(description = "User faculty", example = "Факультет цифровых трансформаций")
+    String faculty;
+
+    @Schema(description = "User educational program", example = "Информационные системы")
+    String program;
 
     @Schema(description = "User roles", example = "ITIS-1917")
     Set<Role> roles;

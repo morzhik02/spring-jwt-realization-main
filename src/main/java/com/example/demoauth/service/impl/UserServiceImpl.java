@@ -3,8 +3,10 @@ package com.example.demoauth.service.impl;
 import com.example.demoauth.exception.DiplomaCoreException;
 import com.example.demoauth.models.dto.UserMeProfileDto;
 import com.example.demoauth.models.dto.UserUpdateDto;
+import com.example.demoauth.models.entity.EducationalProgram;
 import com.example.demoauth.models.entity.Groups;
 import com.example.demoauth.models.entity.User;
+import com.example.demoauth.models.entity.UserFaculty;
 import com.example.demoauth.repository.GroupRepository;
 import com.example.demoauth.repository.UserRepository;
 import com.example.demoauth.service.UserService;
@@ -61,6 +63,9 @@ public class UserServiceImpl implements UserService {
         userMe.setMidname(user.getMidname());
         userMe.setPhoneNumber(user.getPhoneNumber());
         userMe.setEmail(user.getEmail());
+        userMe.setUser(user.getLastname() + " "
+                    + user.getFirstname() + " "
+                    + user.getMidname());
         Groups userGroup = user.getGroup();
         if (userGroup != null){
             userMe.setGroup(user.getGroup().getName());
@@ -70,6 +75,14 @@ public class UserServiceImpl implements UserService {
                         + head.getFirstname() + " "
                         + head.getMidname());
             }
+        }
+        UserFaculty faculty = user.getFaculty();
+        if (faculty != null){
+            userMe.setFaculty(faculty.getName());
+        }
+        EducationalProgram program = user.getProgram();
+        if (program != null){
+            userMe.setProgram(program.getName());
         }
         userMe.setRoles(user.getRoles());
         String stud_IIN = user.getStud_iin();
