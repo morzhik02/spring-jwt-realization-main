@@ -27,8 +27,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository;
-
-
     GroupRepository groupRepository;
 
     @Override
