@@ -36,7 +36,7 @@ public class UserMeProfileDto {
     @Schema(description = "User group", example = "ITIS-1917")
     String group;
 
-    @Schema(description = "User email", example = "ITIS-1917")
+    @Schema(description = "User email", example = "27488@iitu.edu.kz")
     String email;
 
     @Schema(description = "User stud IIN", example = "020421600130")
