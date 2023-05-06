@@ -5,8 +5,7 @@ import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
-import com.example.demoauth.models.entity.Doc;
-import com.example.demoauth.models.entity.User;
+import com.example.demoauth.models.entity.*;
 import com.example.demoauth.models.enums.StatusCode;
 import com.example.demoauth.repository.DocCategoryRepository;
 import com.example.demoauth.repository.DocRepository;
@@ -108,21 +107,61 @@ public class DocServiceImpl implements DocService {
         String role = JwtUtil.getRole();
         Specification<Doc> docSpec = new SpecificationBuilder<>();
 
-        switch (role) {
-            case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
-       }
+//        switch (role) {
+//            case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
+//       }
         if (Objects.nonNull(dto.getDateFrom()) && Objects.nonNull(dto.getDateTo())) {
             docSpec.and(DocSpec.dateFilter(dto.getDateFrom(), dto.getDateTo()));
         }
-        if (Objects.nonNull(dto.getCategory())) {
-            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
-        }
-        if (Objects.nonNull(dto.getStatus())) {
-            docSpec.and(DocSpec.statusFilter(dto.getStatus()));
-        }
+//        if (Objects.nonNull(dto.getCategory())) {
+//            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
+//        }
+//        if (Objects.nonNull(dto.getStatus())) {
+//            docSpec.and(DocSpec.statusFilter(dto.getStatus()));
+//        }
         docSpec.and(DocSpec.docOrderByCreatedDate());
-        List<DocInfoDto> docInfoDtos = new ArrayList<>();
         List<Doc> docs = docRepository.findAll(docSpec);
+        List<DocInfoDto> docInfoDtos = new ArrayList<>();
+        for (Doc doc : docs){
+            DocInfoDto docInfoDto = new DocInfoDto();
+            docInfoDto.setId(doc.getId());
+            DocStatus status = doc.getStatus();
+            if (status != null) {
+                docInfoDto.setStatus(status.getName());
+            }
+            DocCategory category = doc.getCategory();
+            if(category != null) {
+                docInfoDto.setCategory(category.getName());
+            }
+            docInfoDto.setDescription(doc.getDescription());
+            User student = doc.getUser();
+            if(student != null){
+                docInfoDto.setUser(student.getLastname() + " "
+                                + student.getFirstname() + " "
+                                + student.getMidname());
+                docInfoDto.setStudLastName(student.getLastname());
+                docInfoDto.setStudFirstName(student.getFirstname());
+                docInfoDto.setStudMidName(student.getMidname());
+                UserFaculty faculty = student.getFaculty();
+                if (faculty != null){
+                    docInfoDto.setFaculty(faculty.getName());
+                }
+                docInfoDto.setStudentIIN(student.getStud_iin());
+                EducationalProgram program = student.getProgram();
+                if (program != null) {
+                    docInfoDto.setProgram(program.getName());
+                }
+            }
+            User manager = doc.getManager();
+            if (manager != null) {
+                docInfoDto.setManager(manager.getLastname() + " "
+                                    + manager.getFirstname() + " "
+                                    + manager.getMidname());
+            }
+            docInfoDto.setWorkDate(doc.getWorkDate());
+            docInfoDto.setClosedDate(doc.getClosedDate());
+            docInfoDtos.add(docInfoDto);
+        }
         return docInfoDtos;
     }
 

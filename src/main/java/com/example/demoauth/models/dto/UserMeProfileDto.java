@@ -39,6 +39,9 @@ public class UserMeProfileDto {
     @Schema(description = "User email", example = "ITIS-1917")
     String email;
 
+    @Schema(description = "User stud IIN", example = "020421600130")
+    String studIIN;
+
     @Schema(description = "User roles", example = "ITIS-1917")
     Set<Role> roles;
 }

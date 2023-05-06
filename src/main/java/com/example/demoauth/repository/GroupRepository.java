@@ -1,11 +1,15 @@
 package com.example.demoauth.repository;
 
-import com.example.demoauth.models.entity.Group;
-import com.example.demoauth.models.entity.Role;
+import com.example.demoauth.models.entity.Groups;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface GroupRepository extends JpaRepository<Group, Long> {
-    Group findByName(String name);
+public interface GroupRepository extends JpaRepository<Groups, Long> {
+
+    Groups findByName(String name);
+
+    //List<Groups> findAllByGroupName(String GroupName);
 }

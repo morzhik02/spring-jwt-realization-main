@@ -1,6 +1,7 @@
 package com.example.demoauth.controllers;
 
-import com.example.demoauth.models.entity.Group;
+import com.example.demoauth.models.dto.GroupListInfoDto;
+import com.example.demoauth.models.entity.Groups;
 import com.example.demoauth.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -10,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,10 +25,19 @@ import java.util.List;
 public class GroupController {
     GroupService groupService;
 
-    @GetMapping
+//    @GetMapping(name = "/groupname")
+//    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ADMIN')")
+//    @Operation(summary = "Method to get group")
+//    public ResponseEntity<GroupListInfoDto> findAllByGroup(@RequestParam String groupName) {
+//        return ResponseEntity.ok(groupService.findAllByGroup(groupName));
+//    }
+
+    @GetMapping()
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get groups list")
-    public ResponseEntity<List<Group>> findAll() {
+    public ResponseEntity<List<GroupListInfoDto>> findAll() {
         return ResponseEntity.ok(groupService.findAll());
     }
+
+
 }

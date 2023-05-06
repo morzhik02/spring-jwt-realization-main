@@ -1,6 +1,5 @@
 package com.example.demoauth.models.entity;
 
-import com.example.demoauth.models.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.FieldNameConstants;
@@ -47,11 +46,11 @@ public class User extends BaseEntity{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")
-	Group group;
+	Groups group;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "head_id")
-	User head;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "head_id")
+//	User head;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",

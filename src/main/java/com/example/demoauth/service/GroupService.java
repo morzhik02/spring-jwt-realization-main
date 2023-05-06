@@ -1,9 +1,10 @@
 package com.example.demoauth.service;
 
-import com.example.demoauth.models.entity.Group;
+import com.example.demoauth.models.dto.GroupListInfoDto;
 
 import java.util.List;
 
 public interface GroupService {
-    List<Group> findAll();
+    GroupListInfoDto findAllByGroup(String group);
+    List<GroupListInfoDto> findAll();
 }

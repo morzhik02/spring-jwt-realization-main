@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			"/api/auth/signup",
 			"/actuator/**",
 			"/api/cities",
-			"/api/districts/**"
+			"/api/groups/**"
 
 	};
 	@Bean
