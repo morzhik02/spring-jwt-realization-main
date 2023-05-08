@@ -22,6 +22,10 @@ public class DocSpec {
         return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.user).get(BaseEntity.Fields.id), userId);
     }
 
+    public Specification<Doc> managerFilter(Long managerId) {
+        return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.manager).get(BaseEntity.Fields.id), managerId);
+    }
+
     public Specification<Doc> categoryFilter(CategoryCode category) {
         return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.category).get(DocCategory.Fields.code),
                 category);

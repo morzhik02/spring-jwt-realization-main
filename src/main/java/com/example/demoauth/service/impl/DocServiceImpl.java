@@ -107,9 +107,10 @@ public class DocServiceImpl implements DocService {
         String role = JwtUtil.getRole();
         Specification<Doc> docSpec = new SpecificationBuilder<>();
 
-//        switch (role) {
-//            case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
-//       }
+        switch (role) {
+            case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
+            case "ROLE_MODERATOR" -> docSpec.and(DocSpec.managerFilter(user.getId()));
+        }
         if (Objects.nonNull(dto.getDateFrom()) && Objects.nonNull(dto.getDateTo())) {
             docSpec.and(DocSpec.dateFilter(dto.getDateFrom(), dto.getDateTo()));
         }

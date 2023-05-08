@@ -64,6 +64,7 @@ public class DocController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get all doc")
     public ResponseEntity<List<DocInfoDto>> getAllDocs(
             @ParameterObject DocSearchDto docSearchDto) {
