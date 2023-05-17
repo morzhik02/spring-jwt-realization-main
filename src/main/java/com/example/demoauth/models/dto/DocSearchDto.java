@@ -16,13 +16,13 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Schema(description = "DTO for docs search")
 public class DocSearchDto {
-    @Schema(description = "Docs incident date from filter", type = "string", pattern = "dd-MM-yyyy", example = "25-03-2022")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    Date dateFrom;
-
-    @Schema(description = "Docs incident date to filter", type = "string", pattern = "dd-MM-yyyy", example = "25-04-2022")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    Date dateTo;
+//    @Schema(description = "Docs incident date from filter", type = "string", pattern = "dd-MM-yyyy", example = "25-03-2022")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    Date dateFrom;
+//
+//    @Schema(description = "Docs incident date to filter", type = "string", pattern = "dd-MM-yyyy", example = "25-04-2022")
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    Date dateTo;
 
     @Schema(description = "Doc category filter", example = "STATEMENT")
     CategoryCode category;

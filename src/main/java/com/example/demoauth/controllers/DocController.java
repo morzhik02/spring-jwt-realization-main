@@ -42,15 +42,13 @@ public class DocController {
         return ResponseEntity.ok(docService.findById(id));
     }
 
-//    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to save new doc")
-    public ResponseEntity<String> save(@RequestParam(value = "category") CategoryCode category,
-                @RequestParam(value = "description", required = false) String description) {
+    public ResponseEntity<String> save(@RequestBody DocCreateDto docCreateDtoI) {
         DocCreateDto docCreateDto = DocCreateDto.builder()
-                    .category(category)
-                    .description(description)
+                    .category(docCreateDtoI.getCategory())
+                    .description(docCreateDtoI.getDescription())
                     .build();
         docService.save(docCreateDto);
         return ResponseEntity.ok("Doc created successfully");

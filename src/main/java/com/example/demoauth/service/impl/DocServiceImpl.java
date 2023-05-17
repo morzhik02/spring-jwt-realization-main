@@ -111,9 +111,9 @@ public class DocServiceImpl implements DocService {
             case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
             case "ROLE_MODERATOR" -> docSpec.and(DocSpec.managerFilter(user.getId()));
         }
-        if (Objects.nonNull(dto.getDateFrom()) && Objects.nonNull(dto.getDateTo())) {
-            docSpec.and(DocSpec.dateFilter(dto.getDateFrom(), dto.getDateTo()));
-        }
+//        if (Objects.nonNull(dto.getDateFrom()) && Objects.nonNull(dto.getDateTo())) {
+//            docSpec.and(DocSpec.dateFilter(dto.getDateFrom(), dto.getDateTo()));
+//        }
 //        if (Objects.nonNull(dto.getCategory())) {
 //            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
 //        }
