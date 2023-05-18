@@ -92,7 +92,46 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findByUsername(String username) {
+    public UserMeProfileDto findByUsername(String username) {
+        UserMeProfileDto userMe = new UserMeProfileDto();
+        User user = userRepository.findByUsername(username).get();
+        userMe.setFirstname(user.getFirstname());
+        userMe.setLastname(user.getLastname());
+        userMe.setMidname(user.getMidname());
+        userMe.setPhoneNumber(user.getPhoneNumber());
+        userMe.setEmail(user.getEmail());
+        userMe.setUser(user.getLastname() + " "
+                + user.getFirstname() + " "
+                + user.getMidname());
+        Groups userGroup = user.getGroup();
+        if (userGroup != null){
+            userMe.setGroup(user.getGroup().getName());
+            User head = user.getGroup().getHead();
+            if (head != null){
+                userMe.setHeadFullName(head.getLastname() + " "
+                        + head.getFirstname() + " "
+                        + head.getMidname());
+            }
+        }
+        UserFaculty faculty = user.getFaculty();
+        if (faculty != null){
+            userMe.setFaculty(faculty.getName());
+        }
+        EducationalProgram program = user.getProgram();
+        if (program != null){
+            userMe.setProgram(program.getName());
+        }
+        userMe.setRoles(user.getRoles());
+        String stud_IIN = user.getStud_iin();
+        if(stud_IIN != null){
+            userMe.setStudIIN(stud_IIN);
+        }
+        return userMe;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User findUserName(String username) {
         return userRepository.findByUsername(username).orElseThrow(
                 () -> new DiplomaCoreException(HttpStatus.BAD_REQUEST, ApiMessages.USER_NOT_FOUND,
                         "User with this username not found"));

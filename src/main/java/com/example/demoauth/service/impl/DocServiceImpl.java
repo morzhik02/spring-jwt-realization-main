@@ -102,7 +102,7 @@ public class DocServiceImpl implements DocService {
     @Override
     @Transactional(readOnly = true)
     public List<DocInfoDto> findAll(DocSearchDto dto) {
-        User user = userService.findByUsername(JwtUtil.getUsername());
+        User user = userService.findUserName(JwtUtil.getUsername());
         String username = JwtUtil.getUsername();
         String role = JwtUtil.getRole();
         Specification<Doc> docSpec = new SpecificationBuilder<>();

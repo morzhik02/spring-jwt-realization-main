@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping("/profile")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get user profile")
-    public ResponseEntity<User> getUserInfo(@RequestParam String username) {
+    public ResponseEntity<UserMeProfileDto> getUserInfo(@RequestParam String username) {
         return ResponseEntity.ok(userService.findByUsername(username));
     }
 

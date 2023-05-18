@@ -11,5 +11,6 @@ public interface UserService {
     User updateUserProfile(UserUpdateDto userUpdateDto, String username);
     Optional<User> myUserProfile();
     UserMeProfileDto meProfile();
-    User findByUsername(String username);
+    UserMeProfileDto findByUsername(String username);
+    User findUserName(String username);
 }
