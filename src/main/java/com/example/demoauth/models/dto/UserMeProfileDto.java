@@ -53,4 +53,16 @@ public class UserMeProfileDto {
 
     @Schema(description = "User roles", example = "ITIS-1917")
     Set<Role> roles;
+
+    @Schema(description = "User year of admission", example = "2019")
+    String yearAdm;
+
+    @Schema(description = "User grant", example = "Государственный")
+    String studGrant;
+
+    @Schema(description = "User year of graduation", example = "2023")
+    String yearGrad;
+
+    @Schema(description = "User id", example = "2023")
+    String userId;
 }

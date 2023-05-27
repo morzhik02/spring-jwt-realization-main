@@ -74,6 +74,10 @@ public class UserServiceImpl implements UserService {
                         + head.getMidname());
             }
         }
+        userMe.setYearAdm(user.getAdmissionYear());
+        userMe.setYearGrad(user.getGraduationYear());
+        userMe.setStudGrant(user.getStudGrant());
+        userMe.setUserId(user.getStudId());
         UserFaculty faculty = user.getFaculty();
         if (faculty != null){
             userMe.setFaculty(faculty.getName());
@@ -100,6 +104,10 @@ public class UserServiceImpl implements UserService {
         userMe.setMidname(user.getMidname());
         userMe.setPhoneNumber(user.getPhoneNumber());
         userMe.setEmail(user.getEmail());
+        userMe.setUserId(user.getStudId());
+        userMe.setStudGrant(user.getStudGrant());
+        userMe.setYearAdm(user.getAdmissionYear());
+        userMe.setYearGrad(user.getGraduationYear());
         userMe.setUser(user.getLastname() + " "
                 + user.getFirstname() + " "
                 + user.getMidname());

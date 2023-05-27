@@ -32,7 +32,6 @@ public class User extends BaseEntity{
 	String midname;
 	String phoneNumber;
 	String stud_iin;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "faculty_id")
 	UserFaculty faculty;
@@ -43,6 +42,8 @@ public class User extends BaseEntity{
 
 	String admissionYear;
 	String graduationYear;
+	String studGrant;
+	String studId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")
