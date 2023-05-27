@@ -18,11 +18,11 @@ import javax.validation.constraints.Size;
 @ToString
 @Schema(description = "DTO for create docs")
 public class DocCreateDto {
-    @Schema(description = "Doc category code", example = "STATEMENT")
+    @Schema(description = "Doc category code", example = "CERT_STUDY")
     @NotNull(message = "Doc category field required")
     CategoryCode category;
 
-    @Schema(description = "Description", example = "Служебная записка")
+    @Schema(description = "Description", example = "Справка с места учебы")
     @NotBlank(message = "Description field required")
     @Size(min = 20, max = 100, message = "Description of the incident must be at least 20, no more 100 characters")
     String description;

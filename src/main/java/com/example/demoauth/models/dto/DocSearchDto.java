@@ -24,7 +24,7 @@ public class DocSearchDto {
 //    @DateTimeFormat(pattern = "dd-MM-yyyy")
 //    Date dateTo;
 
-    @Schema(description = "Doc category filter", example = "STATEMENT")
+    @Schema(description = "Doc category filter", example = "CERT_STUDY")
     CategoryCode category;
 
     @Schema(description = "Doc status filter", example = "CANCELED")

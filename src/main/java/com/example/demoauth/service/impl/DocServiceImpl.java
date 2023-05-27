@@ -114,12 +114,12 @@ public class DocServiceImpl implements DocService {
 //        if (Objects.nonNull(dto.getDateFrom()) && Objects.nonNull(dto.getDateTo())) {
 //            docSpec.and(DocSpec.dateFilter(dto.getDateFrom(), dto.getDateTo()));
 //        }
-//        if (Objects.nonNull(dto.getCategory())) {
-//            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
-//        }
-//        if (Objects.nonNull(dto.getStatus())) {
-//            docSpec.and(DocSpec.statusFilter(dto.getStatus()));
-//        }
+        if (Objects.nonNull(dto.getCategory())) {
+            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
+        }
+        if (Objects.nonNull(dto.getStatus())) {
+            docSpec.and(DocSpec.statusFilter(dto.getStatus()));
+        }
         docSpec.and(DocSpec.docOrderByCreatedDate());
         List<Doc> docs = docRepository.findAll(docSpec);
         List<DocInfoDto> docInfoDtos = new ArrayList<>();
