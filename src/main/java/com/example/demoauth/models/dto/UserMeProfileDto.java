@@ -65,4 +65,10 @@ public class UserMeProfileDto {
 
     @Schema(description = "User id", example = "2023")
     String userId;
+
+    @Schema(description = "User course", example = "4")
+    String cource;
+
+    @Schema(description = "User educationType", example = "Очная")
+    String educationType;
 }
