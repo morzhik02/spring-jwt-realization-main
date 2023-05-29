@@ -88,6 +88,12 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setFirstname(doc.getUser().getFirstname());
             docInfoDto.setLastname(doc.getUser().getLastname());
             docInfoDto.setMidname(doc.getUser().getMidname());
+            docInfoDto.setYearAdm(doc.getUser().getAdmissionYear());
+            docInfoDto.setStudGrant(doc.getUser().getStudGrant());
+            docInfoDto.setYearGrad(doc.getUser().getGraduationYear());
+            docInfoDto.setUserId(doc.getUser().getStudId());
+            docInfoDto.setCource(doc.getUser().getCourse());
+            docInfoDto.setEducationType(doc.getUser().getEducationType());
         }
         docInfoDto.setWorkDate(doc.getWorkDate());
         docInfoDto.setClosedDate(doc.getClosedDate());
