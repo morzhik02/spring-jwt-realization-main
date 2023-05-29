@@ -184,7 +184,14 @@ public class DocServiceImpl implements DocService {
         Specification<Doc> docSpec = new SpecificationBuilder<>();
 
         switch (role) {
-            case "ROLE_MODERATOR" -> docSpec.and(DocSpec.managerFilter(user.getId()));
+            case "ROLE_USER" -> docSpec.and(DocSpec.userFilter(user.getId()));
+        }
+
+        if (Objects.nonNull(dto.getCategory())) {
+            docSpec.and(DocSpec.categoryFilter(dto.getCategory()));
+        }
+        if (Objects.nonNull(dto.getStatus())) {
+            docSpec.and(DocSpec.statusFilter(dto.getStatus()));
         }
 
         docSpec.and(DocSpec.docOrderByCreatedDate());
