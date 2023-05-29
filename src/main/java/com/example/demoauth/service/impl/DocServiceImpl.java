@@ -27,7 +27,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,10 +87,10 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setUser(doc.getUser().getLastname() + " " + doc.getUser().getFirstname() + " " + doc.getUser().getMidname());
             docInfoDto.setFaculty(doc.getUser().getFaculty().getName());
             docInfoDto.setProgram(doc.getUser().getProgram().getName());
-            docInfoDto.setStudentIIN(doc.getUser().getStud_iin());
-            docInfoDto.setStudFirstName(doc.getUser().getFirstname());
-            docInfoDto.setStudLastName(doc.getUser().getLastname());
-            docInfoDto.setStudMidName(doc.getUser().getMidname());
+            docInfoDto.setStudIIN(doc.getUser().getStud_iin());
+            docInfoDto.setFirstname(doc.getUser().getFirstname());
+            docInfoDto.setLastname(doc.getUser().getLastname());
+            docInfoDto.setMidname(doc.getUser().getMidname());
         }
         docInfoDto.setWorkDate(doc.getWorkDate());
         docInfoDto.setClosedDate(doc.getClosedDate());
@@ -140,14 +139,20 @@ public class DocServiceImpl implements DocService {
                 docInfoDto.setUser(student.getLastname() + " "
                                 + student.getFirstname() + " "
                                 + student.getMidname());
-                docInfoDto.setStudLastName(student.getLastname());
-                docInfoDto.setStudFirstName(student.getFirstname());
-                docInfoDto.setStudMidName(student.getMidname());
+                docInfoDto.setLastname(student.getLastname());
+                docInfoDto.setFirstname(student.getFirstname());
+                docInfoDto.setMidname(student.getMidname());
+                docInfoDto.setYearAdm(student.getAdmissionYear());
+                docInfoDto.setStudGrant(student.getStudGrant());
+                docInfoDto.setYearGrad(student.getGraduationYear());
+                docInfoDto.setUserId(student.getStudId());
+                docInfoDto.setCource(student.getCourse());
+                docInfoDto.setEducationType(student.getEducationType());
                 UserFaculty faculty = student.getFaculty();
                 if (faculty != null){
                     docInfoDto.setFaculty(faculty.getName());
                 }
-                docInfoDto.setStudentIIN(student.getStud_iin());
+                docInfoDto.setStudIIN(student.getStud_iin());
                 EducationalProgram program = student.getProgram();
                 if (program != null) {
                     docInfoDto.setProgram(program.getName());

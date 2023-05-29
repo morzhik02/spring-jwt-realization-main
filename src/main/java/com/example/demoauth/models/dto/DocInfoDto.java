@@ -30,19 +30,19 @@ public class DocInfoDto {
     String user;
 
     @Schema(description = "Doc user firstName", example = "Marzhan")
-    String studFirstName;
+    String firstname;
 
     @Schema(description = "Doc user lastName", example = "Izteleu")
-    String studLastName;
+    String lastname;
 
     @Schema(description = "Doc user midName", example = "Assylkhankyzy")
-    String studMidName;
+    String midname;
 
     @Schema(description = "Doc manager fullname", example = "Izteleu Marzhan Assylkhankyzy")
     String manager;
 
     @Schema(description = "Doc student iin", example = "020421600130")
-    String studentIIN;
+    String studIIN;
 
     @Schema(description = "Doc student faculty", example = "Факультет цифровых трансформаций")
     String faculty;
@@ -56,5 +56,22 @@ public class DocInfoDto {
     @Schema(description = "Doc's closed date", example = "29-03-2022 16:56")
     LocalDateTime closedDate;
 
+    @Schema(description = "User year of admission", example = "2019")
+    String yearAdm;
+
+    @Schema(description = "User grant", example = "Государственный")
+    String studGrant;
+
+    @Schema(description = "User year of graduation", example = "2023")
+    String yearGrad;
+
+    @Schema(description = "User id", example = "2023")
+    String userId;
+
+    @Schema(description = "User course", example = "4")
+    String cource;
+
+    @Schema(description = "User educationType", example = "Очная")
+    String educationType;
 }
 
