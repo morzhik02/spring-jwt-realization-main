@@ -1,10 +1,7 @@
 package com.example.demoauth.service.impl;
 
 import com.example.demoauth.exception.DiplomaCoreException;
-import com.example.demoauth.models.dto.DocChangeStatusDto;
-import com.example.demoauth.models.dto.DocCreateDto;
-import com.example.demoauth.models.dto.DocInfoDto;
-import com.example.demoauth.models.dto.DocSearchDto;
+import com.example.demoauth.models.dto.*;
 import com.example.demoauth.models.entity.*;
 import com.example.demoauth.models.enums.StatusCode;
 import com.example.demoauth.repository.DocCategoryRepository;
@@ -135,19 +132,20 @@ public class DocServiceImpl implements DocService {
             }
             docInfoDto.setDescription(doc.getDescription());
             User student = doc.getUser();
+            User userStud = userRepository.findByUsername(student.getUsername()).get();
             if(student != null){
                 docInfoDto.setUser(student.getLastname() + " "
                                 + student.getFirstname() + " "
                                 + student.getMidname());
-                docInfoDto.setLastname(student.getLastname());
-                docInfoDto.setFirstname(student.getFirstname());
-                docInfoDto.setMidname(student.getMidname());
-                docInfoDto.setYearAdm(student.getAdmissionYear());
-                docInfoDto.setStudGrant(student.getStudGrant());
-                docInfoDto.setYearGrad(student.getGraduationYear());
-                docInfoDto.setUserId(student.getStudId());
-                docInfoDto.setCource(student.getCourse());
-                docInfoDto.setEducationType(student.getEducationType());
+                docInfoDto.setLastname(userStud.getLastname());
+                docInfoDto.setFirstname(userStud.getFirstname());
+                docInfoDto.setMidname(userStud.getMidname());
+                docInfoDto.setYearAdm(userStud.getAdmissionYear());
+                docInfoDto.setStudGrant(userStud.getStudGrant());
+                docInfoDto.setYearGrad(userStud.getGraduationYear());
+                docInfoDto.setUserId(userStud.getStudId());
+                docInfoDto.setCource(userStud.getCourse());
+                docInfoDto.setEducationType(userStud.getEducationType());
                 UserFaculty faculty = student.getFaculty();
                 if (faculty != null){
                     docInfoDto.setFaculty(faculty.getName());
