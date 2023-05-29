@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class DocInfoDto {
     @Schema(description = "Doc category", example = "Справка")
     String category;
 
-    @Schema(description = "Doc description", example = "please help ")
+    @Schema(description = "Doc description", example = "please help")
     String description;
 
     @Schema(description = "Doc user fullname", example = "Izteleu Marzhan Assylkhankyzy")

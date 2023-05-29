@@ -71,10 +71,11 @@ public class DocServiceImpl implements DocService {
         docInfoDto.setId(doc.getId());
         docInfoDto.setStatus(doc.getStatus().getName());
         docInfoDto.setCategory(doc.getCategory().getName());
-        String description = doc.getDescription();
-        if (description != null){
-            docInfoDto.setDescription(description);
-        }
+//        String description = doc.getDescription();
+//        if (description != null){
+//            docInfoDto.setDescription(description);
+//        }
+        docInfoDto.setDescription(doc.getDescription());
         User manager = doc.getManager();
         if(manager != null) {
             docInfoDto.setManager(doc.getManager().getLastname() + " " + doc.getManager().getFirstname() + " " + doc.getManager().getMidname());
@@ -97,7 +98,6 @@ public class DocServiceImpl implements DocService {
         }
         docInfoDto.setWorkDate(doc.getWorkDate());
         docInfoDto.setClosedDate(doc.getClosedDate());
-
         return docInfoDto;
     }
 
