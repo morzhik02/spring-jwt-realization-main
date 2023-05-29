@@ -4,22 +4,18 @@ import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
-import com.example.demoauth.models.enums.CategoryCode;
 import com.example.demoauth.service.DocService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springdoc.api.annotations.ParameterObject;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -66,6 +62,14 @@ public class DocController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get all doc")
     public ResponseEntity<List<DocInfoDto>> getAllDocs(
+            @ParameterObject DocSearchDto docSearchDto) {
+        return ResponseEntity.ok(docService.findAllByRole(docSearchDto));
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @Operation(summary = "Method to get all doc")
+    public ResponseEntity<List<DocInfoDto>> getAllDoc(
             @ParameterObject DocSearchDto docSearchDto) {
         return ResponseEntity.ok(docService.findAll(docSearchDto));
     }

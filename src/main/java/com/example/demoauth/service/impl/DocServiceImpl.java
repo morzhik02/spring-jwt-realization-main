@@ -103,7 +103,7 @@ public class DocServiceImpl implements DocService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<DocInfoDto> findAll(DocSearchDto dto) {
+    public List<DocInfoDto> findAllByRole(DocSearchDto dto) {
         User user = userService.findUserName(JwtUtil.getUsername());
         String username = JwtUtil.getUsername();
         String role = JwtUtil.getRole();
@@ -167,6 +167,71 @@ public class DocServiceImpl implements DocService {
                 docInfoDto.setManager(manager.getLastname() + " "
                                     + manager.getFirstname() + " "
                                     + manager.getMidname());
+            }
+            docInfoDto.setWorkDate(doc.getWorkDate());
+            docInfoDto.setClosedDate(doc.getClosedDate());
+            docInfoDtos.add(docInfoDto);
+        }
+        return docInfoDtos;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<DocInfoDto> findAll(DocSearchDto dto) {
+        User user = userService.findUserName(JwtUtil.getUsername());
+        String username = JwtUtil.getUsername();
+        String role = JwtUtil.getRole();
+        Specification<Doc> docSpec = new SpecificationBuilder<>();
+
+        switch (role) {
+            case "ROLE_MODERATOR" -> docSpec.and(DocSpec.managerFilter(user.getId()));
+        }
+
+        docSpec.and(DocSpec.docOrderByCreatedDate());
+        List<Doc> docs = docRepository.findAll(docSpec);
+        List<DocInfoDto> docInfoDtos = new ArrayList<>();
+        for (Doc doc : docs){
+            DocInfoDto docInfoDto = new DocInfoDto();
+            docInfoDto.setId(doc.getId());
+            DocStatus status = doc.getStatus();
+            if (status != null) {
+                docInfoDto.setStatus(status.getName());
+            }
+            DocCategory category = doc.getCategory();
+            if(category != null) {
+                docInfoDto.setCategory(category.getName());
+            }
+            docInfoDto.setDescription(doc.getDescription());
+            User student = doc.getUser();
+            User userStud = userRepository.findByUsername(student.getUsername()).get();
+            if(student != null){
+                docInfoDto.setUser(student.getLastname() + " "
+                        + student.getFirstname() + " "
+                        + student.getMidname());
+                docInfoDto.setLastname(userStud.getLastname());
+                docInfoDto.setFirstname(userStud.getFirstname());
+                docInfoDto.setMidname(userStud.getMidname());
+                docInfoDto.setYearAdm(userStud.getAdmissionYear());
+                docInfoDto.setStudGrant(userStud.getStudGrant());
+                docInfoDto.setYearGrad(userStud.getGraduationYear());
+                docInfoDto.setUserId(userStud.getStudId());
+                docInfoDto.setCource(userStud.getCourse());
+                docInfoDto.setEducationType(userStud.getEducationType());
+                UserFaculty faculty = student.getFaculty();
+                if (faculty != null){
+                    docInfoDto.setFaculty(faculty.getName());
+                }
+                docInfoDto.setStudIIN(student.getStud_iin());
+                EducationalProgram program = student.getProgram();
+                if (program != null) {
+                    docInfoDto.setProgram(program.getName());
+                }
+            }
+            User manager = doc.getManager();
+            if (manager != null) {
+                docInfoDto.setManager(manager.getLastname() + " "
+                        + manager.getFirstname() + " "
+                        + manager.getMidname());
             }
             docInfoDto.setWorkDate(doc.getWorkDate());
             docInfoDto.setClosedDate(doc.getClosedDate());

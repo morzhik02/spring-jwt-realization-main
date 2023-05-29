@@ -4,7 +4,6 @@ import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ public interface DocService {
 
     DocInfoDto findById(Long id);
 
+    List<DocInfoDto> findAllByRole(DocSearchDto docSearchDto);
     List<DocInfoDto> findAll(DocSearchDto docSearchDto);
 
     void changeStatus(DocChangeStatusDto docChangeStatusDto);
