@@ -4,5 +4,6 @@ public enum StatusCode {
     NEW,
     IN_PROGRESS,
     CLOSED,
-    CANCELED
+    CANCELED,
+    REJECTED
 }

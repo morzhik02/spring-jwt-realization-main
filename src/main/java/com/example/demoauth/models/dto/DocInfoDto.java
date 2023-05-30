@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -57,6 +58,12 @@ public class DocInfoDto {
 
     @Schema(description = "Doc's closed date", example = "29-03-2022 16:56")
     LocalDateTime closedDate;
+
+    @Schema(description = "Doc's created date", example = "29-03-2022 16:56")
+    LocalDateTime createdAt;
+
+    @Schema(description = "Doc's updated date", example = "29-03-2022 16:56")
+    LocalDateTime updatedAt;
 
     @Schema(description = "User year of admission", example = "2019")
     String yearAdm;

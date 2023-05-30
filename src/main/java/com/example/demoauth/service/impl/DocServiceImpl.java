@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -98,6 +99,8 @@ public class DocServiceImpl implements DocService {
         }
         docInfoDto.setWorkDate(doc.getWorkDate());
         docInfoDto.setClosedDate(doc.getClosedDate());
+        docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
+        docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
         return docInfoDto;
     }
 
@@ -170,6 +173,8 @@ public class DocServiceImpl implements DocService {
             }
             docInfoDto.setWorkDate(doc.getWorkDate());
             docInfoDto.setClosedDate(doc.getClosedDate());
+            docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
+            docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;
@@ -242,6 +247,8 @@ public class DocServiceImpl implements DocService {
             }
             docInfoDto.setWorkDate(doc.getWorkDate());
             docInfoDto.setClosedDate(doc.getClosedDate());
+            docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
+            docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;
@@ -275,7 +282,7 @@ public class DocServiceImpl implements DocService {
                             "\n" + "\n" +
                             "Это письмо создано автоматически. Отвечать на него не нужно\n" +
                             "\n" +
-                            "С уважением, Ваш универ");
+                            "С уважением, Ваш университет");
             log.info("Send in progress message to " + studentEmail);
         } else if (statusCode == StatusCode.CLOSED.toString()){
             doc.setClosedDate(LocalDateTime.now());
@@ -287,11 +294,27 @@ public class DocServiceImpl implements DocService {
                     "Добрый день!\n" +
                             "\n" +
                             "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
-                            "Скачать его можно будет в разделе Архив заявок" +
+                            //"Скачать его можно будет в разделе Архив заявок" +
                             "\n" + "\n" +
                             "Это письмо создано автоматически. Отвечать на него не нужно\n" +
                             "\n" +
-                            "С уважением, Ваш универ");
+                            "С уважением, Ваш университет");
+            log.info("Send closed message to " + studentEmail);
+        } else if (statusCode == StatusCode.REJECTED.toString()){
+            doc.setRejectedDate(LocalDateTime.now());
+            doc.setManager(userRepository.getByUsername(username));
+            doc.setLastModifiedBy(username);
+            doc.setLastModifiedDate(LocalDateTime.now());
+            emailService.sendEmail(studentEmail,
+                    "Смена статуса Вашего обращения №" + docId,
+                    "Добрый день!\n" +
+                            "\n" +
+                            "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
+                            "Отправлено на доработку" +
+                            "\n" + "\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "\n" +
+                            "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
         }
         docRepository.save(doc);
