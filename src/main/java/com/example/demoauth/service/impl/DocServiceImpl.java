@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -102,6 +103,22 @@ public class DocServiceImpl implements DocService {
         docInfoDto.setClosedDate(doc.getClosedDate());
         docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
         docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
+        DateTimeFormatter formatterCreated = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
+        DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
+        DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+        DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+        DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+        DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+        DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+        DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
         return docInfoDto;
     }
 
@@ -184,6 +201,22 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setClosedDate(doc.getClosedDate());
             docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
             docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
+            DateTimeFormatter formatterCreated = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
+            DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
+            DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+            DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+            DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+            DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+            DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+            DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;
@@ -266,6 +299,22 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setClosedDate(doc.getClosedDate());
             docInfoDto.setCreatedAt(LocalDateTime.ofInstant(doc.getCreatedAt().toInstant(), ZoneId.systemDefault()));
             docInfoDto.setUpdatedAt(LocalDateTime.ofInstant(doc.getUpdatedAt().toInstant(), ZoneId.systemDefault()));
+            DateTimeFormatter formatterCreated = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
+            DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
+            DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+            DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+            DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+            DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+            DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+            DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;

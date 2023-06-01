@@ -74,6 +74,42 @@ public class DocInfoDto {
     @Schema(description = "Doc's updated date", example = "29-03-2022 16:56")
     LocalDateTime updatedAt;
 
+    @Schema(description = "Doc's created date", example = "29.05.2023")
+    String created;
+
+    @Schema(description = "Doc's createdTime date", example = "29.05.2023 16:43")
+    String createdTime;
+
+    @Schema(description = "Doc's updated date", example = "29.05.2023")
+    String updated;
+
+    @Schema(description = "Doc's updateTime date", example = "29.05.2023 16:43")
+    String updatedTime;
+
+    @Schema(description = "Doc's closed date", example = "29.05.2023")
+    String closed;
+
+    @Schema(description = "Doc's closedTime date", example = "29.05.2023 16:43")
+    String closedTime;
+
+    @Schema(description = "Doc's rejected date", example = "29.05.2023")
+    String rejected;
+
+    @Schema(description = "Doc's rejectedTime date", example = "29.05.2023 16:43")
+    String rejectedTime;
+
+    @Schema(description = "Doc's canceled date", example = "29.05.2023")
+    String canceled;
+
+    @Schema(description = "Doc's canceledTime date", example = "29.05.2023 16:43")
+    String canceledTime;
+
+    @Schema(description = "Doc's worked date", example = "29.05.2023")
+    String worked;
+
+    @Schema(description = "Doc's workedTime date", example = "29.05.2023 16:43")
+    String workedTime;
+
     @Schema(description = "User year of admission", example = "2019")
     String yearAdm;
 
