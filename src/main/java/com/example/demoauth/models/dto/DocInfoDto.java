@@ -44,6 +44,9 @@ public class DocInfoDto {
     @Schema(description = "Doc manager fullname", example = "Izteleu Marzhan Assylkhankyzy")
     String manager;
 
+    @Schema(description = "Doc manager fullname", example = "Izteleu Marzhan Assylkhankyzy")
+    String managerLogin;
+
     @Schema(description = "Doc student iin", example = "020421600130")
     String studIIN;
 

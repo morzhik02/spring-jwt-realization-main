@@ -80,6 +80,7 @@ public class DocServiceImpl implements DocService {
         User manager = doc.getManager();
         if(manager != null) {
             docInfoDto.setManager(doc.getManager().getLastname() + " " + doc.getManager().getFirstname() + " " + doc.getManager().getMidname());
+            docInfoDto.setManagerLogin(manager.getUsername());
         }
         User user = doc.getUser();
         if(user != null) {
@@ -170,6 +171,7 @@ public class DocServiceImpl implements DocService {
                 docInfoDto.setManager(manager.getLastname() + " "
                                     + manager.getFirstname() + " "
                                     + manager.getMidname());
+                docInfoDto.setManagerLogin(manager.getUsername());
             }
             docInfoDto.setWorkDate(doc.getWorkDate());
             docInfoDto.setClosedDate(doc.getClosedDate());
@@ -244,6 +246,7 @@ public class DocServiceImpl implements DocService {
                 docInfoDto.setManager(manager.getLastname() + " "
                         + manager.getFirstname() + " "
                         + manager.getMidname());
+                docInfoDto.setManagerLogin(doc.getManager().getUsername());
             }
             docInfoDto.setWorkDate(doc.getWorkDate());
             docInfoDto.setClosedDate(doc.getClosedDate());
