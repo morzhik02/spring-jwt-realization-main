@@ -107,24 +107,24 @@ public class DocServiceImpl implements DocService {
         docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
         DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
-        if(doc.getWorkDate() != null) {
-            DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
-            DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-            docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
-        }
-        if(doc.getCanceledDate() != null) {
-            DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
-            DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-            docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
-        }
-        if(doc.getRejectedDate() != null) {
-            DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
-            DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-            docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
-        }
+//        if(doc.getWorkDate() != null) {
+//            DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//            docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+//            DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//            docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+//        }
+//        if(doc.getCanceledDate() != null) {
+//            DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//            docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+//            DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//            docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+//        }
+//        if(doc.getRejectedDate() != null) {
+//            DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//            docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+//            DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//            docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
+//        }
         return docInfoDto;
     }
 
@@ -211,24 +211,24 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
             DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
-            if(doc.getWorkDate() != null) {
-                DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
-                DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
-            }
-            if(doc.getCanceledDate() != null) {
-                DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
-                DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
-            }
-            if(doc.getRejectedDate() != null) {
-                DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
-                DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
-            }
+//            if(doc.getWorkDate() != null) {
+//                DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+//                DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+//            }
+//            if(doc.getCanceledDate() != null) {
+//                DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+//                DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+//            }
+//            if(doc.getRejectedDate() != null) {
+//                DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+//                DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
+//            }
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;
@@ -315,24 +315,24 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
             DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
-            if(doc.getWorkDate() != null) {
-                DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
-                DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
-            }
-            if(doc.getCanceledDate() != null) {
-                DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
-                DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
-            }
-            if(doc.getRejectedDate() != null) {
-                DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
-                DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-                docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
-            }
+//            if(doc.getWorkDate() != null) {
+//                DateTimeFormatter formatterWorked = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setWorked(doc.getWorkDate().format(formatterWorked));
+//                DateTimeFormatter formatterWorkedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setWorkedTime(doc.getWorkDate().format(formatterWorkedTime));
+//            }
+//            if(doc.getCanceledDate() != null) {
+//                DateTimeFormatter formatterCanceled = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setCanceled(doc.getCanceledDate().format(formatterCanceled));
+//                DateTimeFormatter formatterCanceledTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setCreatedTime(doc.getWorkDate().format(formatterCanceledTime));
+//            }
+//            if(doc.getRejectedDate() != null) {
+//                DateTimeFormatter formatterRejected = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//                docInfoDto.setRejected(doc.getRejectedDate().format(formatterRejected));
+//                DateTimeFormatter formatterRejectedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+//                docInfoDto.setRejectedTime(doc.getRejectedDate().format(formatterRejectedTime));
+//            }
             docInfoDtos.add(docInfoDto);
         }
         return docInfoDtos;
