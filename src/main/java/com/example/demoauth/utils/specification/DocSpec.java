@@ -34,7 +34,7 @@ public class DocSpec {
     }
 
     public Specification<Doc> managerLoginFilter(String managerLogin) {
-        return (r, cq, cb) -> cb.equal(r.get(User.Fields.username).get(Doc.Fields.manager), managerLogin);
+        return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.manager).get(User.Fields.username), managerLogin);
     }
 
     public Specification<Doc> dateFilter(Date dateFrom, Date dateTo) {
