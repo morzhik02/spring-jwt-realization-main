@@ -4,6 +4,7 @@ import com.example.demoauth.models.dto.DocChangeStatusDto;
 import com.example.demoauth.models.dto.DocCreateDto;
 import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.DocSearchDto;
+import com.example.demoauth.models.enums.StatusCode;
 import com.example.demoauth.service.DocService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -71,6 +72,13 @@ public class DocController {
     @Operation(summary = "Method to get all doc")
     public ResponseEntity<List<DocInfoDto>> getAllDoc(
             @ParameterObject DocSearchDto docSearchDto) {
+        return ResponseEntity.ok(docService.findAll(docSearchDto));
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @Operation(summary = "Method to get all doc")
+    public ResponseEntity<List<DocInfoDto>> getAllDocWithStatuses(@ParameterObject DocSearchDto docSearchDto) {
         return ResponseEntity.ok(docService.findAll(docSearchDto));
     }
 }

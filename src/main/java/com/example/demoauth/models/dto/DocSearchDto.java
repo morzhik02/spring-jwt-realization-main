@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +33,9 @@ public class DocSearchDto {
 
     @Schema(description = "Doc manager filter", example = "o.kim")
     String managerLogin;
+
+    @Schema(description = "Doc manager filter", example = "o.kim")
+    List<StatusCode> statuses;
 
 //    @Schema(description = "Query search for doc number")
 //    String query;
