@@ -30,6 +30,9 @@ public class DocSearchDto {
     @Schema(description = "Doc status filter", example = "CANCELED")
     StatusCode status;
 
+    @Schema(description = "Doc manager filter", example = "o.kim")
+    String managerLogin;
+
 //    @Schema(description = "Query search for doc number")
 //    String query;
 }
