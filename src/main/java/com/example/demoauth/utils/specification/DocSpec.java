@@ -1,11 +1,9 @@
 package com.example.demoauth.utils.specification;
 
-import com.example.demoauth.models.entity.BaseEntity;
-import com.example.demoauth.models.entity.Doc;
-import com.example.demoauth.models.entity.DocCategory;
-import com.example.demoauth.models.entity.DocStatus;
+import com.example.demoauth.models.entity.*;
 import com.example.demoauth.models.enums.CategoryCode;
 import com.example.demoauth.models.enums.StatusCode;
+import com.example.demoauth.service.UserService;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.domain.Sort;
@@ -36,7 +34,7 @@ public class DocSpec {
     }
 
     public Specification<Doc> managerLoginFilter(String managerLogin) {
-        return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.manager).get(Doc.Fields.manager), managerLogin);
+        return (r, cq, cb) -> cb.equal(r.get(User.Fields.username).get(Doc.Fields.manager), managerLogin);
     }
 
     public Specification<Doc> dateFilter(Date dateFrom, Date dateTo) {
