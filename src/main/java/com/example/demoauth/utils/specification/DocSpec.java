@@ -34,6 +34,10 @@ public class DocSpec {
         return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.status).get(DocStatus.Fields.code), status);
     }
 
+    public Specification<Doc> docIdFilter(Long id) {
+        return (r, cq, cb) -> cb.equal(r.get(BaseEntity.Fields.id), id);
+    }
+
     public Specification<Doc> withStatusesFilter(List<StatusCode> statuses) {
         return (r, cq, cb) -> r.get(Doc.Fields.status).get(DocStatus.Fields.code).in(statuses);
     }

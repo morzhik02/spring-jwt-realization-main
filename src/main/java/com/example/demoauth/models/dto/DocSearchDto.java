@@ -37,6 +37,9 @@ public class DocSearchDto {
     @Schema(description = "Doc manager filter", example = "o.kim")
     List<StatusCode> statuses;
 
+    @Schema(description = "Doc id filter", example = "39")
+    Long docId;
+
 //    @Schema(description = "Query search for doc number")
 //    String query;
 }

@@ -156,6 +156,11 @@ public class DocServiceImpl implements DocService {
         if (Objects.nonNull(dto.getStatuses())) {
             docSpec.and(DocSpec.withStatusesFilter((dto.getStatuses())));
         }
+
+        if (Objects.nonNull(dto.getDocId())) {
+            docSpec.and(DocSpec.docIdFilter((dto.getDocId())));
+        }
+
         docSpec.and(DocSpec.docOrderByCreatedDate());
         List<Doc> docs = docRepository.findAll(docSpec);
         List<DocInfoDto> docInfoDtos = new ArrayList<>();
@@ -258,6 +263,9 @@ public class DocServiceImpl implements DocService {
         }
         if (Objects.nonNull(dto.getStatuses())) {
             docSpec.and(DocSpec.withStatusesFilter((dto.getStatuses())));
+        }
+        if (Objects.nonNull(dto.getDocId())) {
+            docSpec.and(DocSpec.docIdFilter((dto.getDocId())));
         }
 
         docSpec.and(DocSpec.docOrderByCreatedDate());
