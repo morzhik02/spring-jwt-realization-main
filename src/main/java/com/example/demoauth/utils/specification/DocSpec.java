@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import java.util.Date;
+import java.util.List;
 
 @UtilityClass
 public class DocSpec {
@@ -31,6 +32,10 @@ public class DocSpec {
 
     public Specification<Doc> statusFilter(StatusCode status) {
         return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.status).get(DocStatus.Fields.code), status);
+    }
+
+    public Specification<Doc> withStatusesFilter(List<StatusCode> statuses) {
+        return (r, cq, cb) -> r.get(Doc.Fields.status).get(DocStatus.Fields.code).in(statuses);
     }
 
     public Specification<Doc> managerLoginFilter(String managerLogin) {
