@@ -48,7 +48,7 @@ public class Doc extends BaseEntity{
 
     LocalDateTime closedDate;
     LocalDateTime workDate;
-
     LocalDateTime rejectedDate;
+    LocalDateTime canceledDate;
 
 }

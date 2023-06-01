@@ -326,6 +326,22 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
+        } else if (statusCode == StatusCode.CANCELED.toString()){
+            doc.setCanceledDate(LocalDateTime.now());
+            doc.setManager(userRepository.getByUsername(username));
+            doc.setLastModifiedBy(username);
+            doc.setLastModifiedDate(LocalDateTime.now());
+            emailService.sendEmail(studentEmail,
+                    "Смена статуса Вашего обращения №" + docId,
+                    "Добрый день!\n" +
+                            "\n" +
+                            "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
+                            "Запрос отколенен" +
+                            "\n" + "\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "\n" +
+                            "С уважением, Ваш университет");
+            log.info("Send closed message to " + studentEmail);
         }
         docRepository.save(doc);
 

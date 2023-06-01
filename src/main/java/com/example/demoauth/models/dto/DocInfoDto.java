@@ -62,6 +62,12 @@ public class DocInfoDto {
     @Schema(description = "Doc's closed date", example = "29-03-2022 16:56")
     LocalDateTime closedDate;
 
+    @Schema(description = "Doc's reject date", example = "29-03-2022 16:56")
+    LocalDateTime rejectedDate;
+
+    @Schema(description = "Doc's cancel date", example = "29-03-2022 16:56")
+    LocalDateTime canceledDate;
+
     @Schema(description = "Doc's created date", example = "29-03-2022 16:56")
     LocalDateTime createdAt;
 
