@@ -71,4 +71,7 @@ public class UserMeProfileDto {
 
     @Schema(description = "User educationType", example = "Очная")
     String educationType;
+
+    @Schema(description = "User position", example = "Менеджер")
+    String position;
 }

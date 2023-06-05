@@ -46,6 +46,7 @@ public class User extends BaseEntity{
 	String studId;
 	String course;
 	String educationType;
+	String position;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")
