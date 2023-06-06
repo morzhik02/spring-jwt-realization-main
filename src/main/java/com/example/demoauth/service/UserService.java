@@ -1,5 +1,6 @@
 package com.example.demoauth.service;
 
+import com.example.demoauth.models.dto.DocInfoDto;
 import com.example.demoauth.models.dto.UserMeProfileDto;
 import com.example.demoauth.models.dto.UserSearchDto;
 import com.example.demoauth.models.dto.UserUpdateDto;
