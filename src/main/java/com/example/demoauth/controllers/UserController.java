@@ -1,7 +1,6 @@
 package com.example.demoauth.controllers;
 
-import com.example.demoauth.models.dto.UserMeProfileDto;
-import com.example.demoauth.models.dto.UserUpdateDto;
+import com.example.demoauth.models.dto.*;
 import com.example.demoauth.models.entity.User;
 import com.example.demoauth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,11 +9,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -54,5 +55,13 @@ public class UserController {
     public ResponseEntity<String> updateUserProfile(@Valid @RequestBody UserUpdateDto userUpdateDto, @RequestParam String username) {
         userService.updateUserProfile(userUpdateDto, username);
         return ResponseEntity.ok("User profile updated successfully");
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+    @Operation(summary = "Method to get all doc")
+    public ResponseEntity<List<UserMeProfileDto>> getAllDoc(
+            @ParameterObject UserSearchDto userSearchDto) {
+        return ResponseEntity.ok(userService.findAll(userSearchDto));
     }
 }

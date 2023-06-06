@@ -1,7 +1,9 @@
 package com.example.demoauth.service.impl;
 
 import com.example.demoauth.exception.DiplomaCoreException;
+import com.example.demoauth.models.dto.DocSearchDto;
 import com.example.demoauth.models.dto.UserMeProfileDto;
+import com.example.demoauth.models.dto.UserSearchDto;
 import com.example.demoauth.models.dto.UserUpdateDto;
 import com.example.demoauth.models.entity.EducationalProgram;
 import com.example.demoauth.models.entity.Groups;
@@ -12,13 +14,19 @@ import com.example.demoauth.repository.UserRepository;
 import com.example.demoauth.service.UserService;
 import com.example.demoauth.utils.ApiMessages;
 import com.example.demoauth.utils.JwtUtil;
+import com.example.demoauth.utils.specification.SpecificationBuilder;
+import com.example.demoauth.utils.specification.UserSpec;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -149,5 +157,58 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username).orElseThrow(
                 () -> new DiplomaCoreException(HttpStatus.BAD_REQUEST, ApiMessages.USER_NOT_FOUND,
                         "User with this username not found"));
+    }
+
+    @Override
+    public List<UserMeProfileDto> findAll(UserSearchDto dto) {
+        Specification<User> userSpec = new SpecificationBuilder<>();
+        if(Objects.nonNull(dto.getUsername())){
+            userSpec.and(UserSpec.usernameFilter(dto.getUsername()));
+        }
+        List<UserMeProfileDto> userMeProfileDtos = new ArrayList<>();
+        List<User> users = userRepository.findAll();
+        for (User user : users){
+            UserMeProfileDto userMe = new UserMeProfileDto();
+            userMe.setFirstname(user.getFirstname());
+            userMe.setLastname(user.getLastname());
+            userMe.setMidname(user.getMidname());
+            userMe.setPhoneNumber(user.getPhoneNumber());
+            userMe.setEmail(user.getEmail());
+            userMe.setUserId(user.getStudId());
+            userMe.setStudGrant(user.getStudGrant());
+            userMe.setYearAdm(user.getAdmissionYear());
+            userMe.setYearGrad(user.getGraduationYear());
+            userMe.setCource(user.getCourse());
+            userMe.setEducationType(user.getEducationType());
+            userMe.setPosition(user.getPosition());
+            userMe.setUser(user.getLastname() + " "
+                    + user.getFirstname() + " "
+                    + user.getMidname());
+            Groups userGroup = user.getGroup();
+            if (userGroup != null){
+                userMe.setGroup(user.getGroup().getName());
+                User head = user.getGroup().getHead();
+                if (head != null){
+                    userMe.setHeadFullName(head.getLastname() + " "
+                            + head.getFirstname() + " "
+                            + head.getMidname());
+                }
+            }
+            UserFaculty faculty = user.getFaculty();
+            if (faculty != null){
+                userMe.setFaculty(faculty.getName());
+            }
+            EducationalProgram program = user.getProgram();
+            if (program != null){
+                userMe.setProgram(program.getName());
+            }
+            userMe.setRoles(user.getRoles());
+            String stud_IIN = user.getStud_iin();
+            if(stud_IIN != null){
+                userMe.setStudIIN(stud_IIN);
+            }
+            userMeProfileDtos.add(userMe);
+        }
+        return userMeProfileDtos;
     }
 }
