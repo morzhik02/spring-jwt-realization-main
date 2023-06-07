@@ -1,5 +1,6 @@
 package com.example.demoauth.controllers;
 
+import com.example.demoauth.models.dto.MsgInfoDto;
 import com.example.demoauth.models.entity.News;
 import com.example.demoauth.models.entity.Notification;
 import com.example.demoauth.service.NotificationService;
@@ -31,7 +32,7 @@ public class NotificationController {
     @GetMapping
     @Operation(summary = "Method to get all notifications")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<List<Notification>> getAllNotifications() {
+    public ResponseEntity<List<MsgInfoDto>> getAllNotifications() {
         return ResponseEntity.ok(notificationService.getAll());
     }
 
