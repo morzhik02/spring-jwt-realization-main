@@ -4,10 +4,7 @@ import com.example.demoauth.exception.DiplomaCoreException;
 import com.example.demoauth.models.dto.*;
 import com.example.demoauth.models.entity.*;
 import com.example.demoauth.models.enums.StatusCode;
-import com.example.demoauth.repository.DocCategoryRepository;
-import com.example.demoauth.repository.DocRepository;
-import com.example.demoauth.repository.DocStatusRepository;
-import com.example.demoauth.repository.UserRepository;
+import com.example.demoauth.repository.*;
 import com.example.demoauth.service.DocService;
 import com.example.demoauth.service.EmailService;
 import com.example.demoauth.service.UserService;
@@ -41,6 +38,7 @@ public class DocServiceImpl implements DocService {
     DocCategoryRepository docCategoryRepository;
     DocStatusRepository docStatusRepository;
     UserRepository userRepository;
+    NotificationRepository notificationRepository;
 
     UserService userService;
     EmailService emailService;
@@ -376,6 +374,10 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send in progress message to " + studentEmail);
+            Notification notification = new Notification();
+            notification.setMessage("Ваше обращения №" + docId + " взято в работу");
+            notification.setUser(user);
+            notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CLOSED.toString()){
             doc.setClosedDate(LocalDateTime.now());
             doc.setManager(userRepository.getByUsername(username));
@@ -392,6 +394,10 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
+            Notification notification = new Notification();
+            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
+            notification.setUser(user);
+            notificationRepository.save(notification);
         } else if (statusCode == StatusCode.REJECTED.toString()){
             doc.setRejectedDate(LocalDateTime.now());
             doc.setManager(userRepository.getByUsername(username));
@@ -408,6 +414,10 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
+            Notification notification = new Notification();
+            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
+            notification.setUser(user);
+            notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CANCELED.toString()){
             doc.setCanceledDate(LocalDateTime.now());
             doc.setManager(userRepository.getByUsername(username));
@@ -424,6 +434,10 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
+            Notification notification = new Notification();
+            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
+            notification.setUser(user);
+            notificationRepository.save(notification);
         }
         docRepository.save(doc);
 
