@@ -4,6 +4,7 @@ import com.example.demoauth.models.dto.MsgInfoDto;
 import com.example.demoauth.models.entity.Notification;
 import com.example.demoauth.repository.NotificationRepository;
 import com.example.demoauth.service.NotificationService;
+import com.example.demoauth.utils.JwtUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,12 +29,14 @@ public class NotificationServiceImpl implements NotificationService {
         List<Notification> notifications = notificationRepository.findAll();
         List<MsgInfoDto> msgInfoDtos = new ArrayList<>();
         for(Notification notification : notifications){
-            MsgInfoDto msgInfoDto = new MsgInfoDto();
-            msgInfoDto.setUsername(notification.getUser().getUsername());
-            msgInfoDto.setMessage(notification.getMessage());
-            DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-            msgInfoDto.setCreatedTime(notification.getCreatedDate().format(formatterCreatedTime));
-            msgInfoDtos.add(msgInfoDto);
+            if(notification.getUser().getUsername() == JwtUtil.getUsername()) {
+                MsgInfoDto msgInfoDto = new MsgInfoDto();
+                msgInfoDto.setUsername(notification.getUser().getUsername());
+                msgInfoDto.setMessage(notification.getMessage());
+                DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+                msgInfoDto.setCreatedTime(notification.getCreatedDate().format(formatterCreatedTime));
+                msgInfoDtos.add(msgInfoDto);
+            }
         }
 
         return msgInfoDtos;

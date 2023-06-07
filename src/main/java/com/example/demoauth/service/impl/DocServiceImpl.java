@@ -377,6 +377,7 @@ public class DocServiceImpl implements DocService {
             Notification notification = new Notification();
             notification.setMessage("Ваше обращения №" + docId + " взято в работу");
             notification.setUser(user);
+            notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CLOSED.toString()){
             doc.setClosedDate(LocalDateTime.now());
@@ -397,6 +398,7 @@ public class DocServiceImpl implements DocService {
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
             notification.setUser(user);
+            notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.REJECTED.toString()){
             doc.setRejectedDate(LocalDateTime.now());
@@ -417,6 +419,7 @@ public class DocServiceImpl implements DocService {
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
             notification.setUser(user);
+            notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CANCELED.toString()){
             doc.setCanceledDate(LocalDateTime.now());
@@ -437,6 +440,7 @@ public class DocServiceImpl implements DocService {
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
             notification.setUser(user);
+            notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         }
         docRepository.save(doc);
