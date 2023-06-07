@@ -376,7 +376,7 @@ public class DocServiceImpl implements DocService {
             log.info("Send in progress message to " + studentEmail);
             Notification notification = new Notification();
             notification.setMessage("Ваше обращения №" + docId + " взято в работу");
-            notification.setUser(user);
+            notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CLOSED.toString()){
@@ -397,7 +397,7 @@ public class DocServiceImpl implements DocService {
             log.info("Send closed message to " + studentEmail);
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
-            notification.setUser(user);
+            notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.REJECTED.toString()){
@@ -418,7 +418,7 @@ public class DocServiceImpl implements DocService {
             log.info("Send closed message to " + studentEmail);
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
-            notification.setUser(user);
+            notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         } else if (statusCode == StatusCode.CANCELED.toString()){
@@ -439,7 +439,7 @@ public class DocServiceImpl implements DocService {
             log.info("Send closed message to " + studentEmail);
             Notification notification = new Notification();
             notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
-            notification.setUser(user);
+            notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
         }
