@@ -14,7 +14,7 @@ import javax.persistence.criteria.Path;
 @UtilityClass
 public class NotificationSpec {
 
-    public Specification<Notification> docOrderByCreatedDate() {
+    public Specification<Notification> msgOrderByCreatedDate() {
         return (r, cq, cb) -> {
             Path<Notification> field = r.get(Notification.Fields.createdAt);
             switchDirection(Sort.Direction.DESC, cq, cb, field);
