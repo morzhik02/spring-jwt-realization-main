@@ -438,7 +438,7 @@ public class DocServiceImpl implements DocService {
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
             Notification notification = new Notification();
-            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено");
+            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено. Можете забрать документ в деканате.");
             notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
