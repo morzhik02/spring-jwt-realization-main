@@ -23,22 +23,6 @@ public class GroupServiceImpl implements GroupService {
     UserRepository userRepository;
 
     @Override
-    @Transactional(readOnly = true)
-    public GroupListInfoDto findAllByGroup(String group) {
-        GroupListInfoDto groupListInfoDto = new GroupListInfoDto();
-        Groups groupN = groupRepository.findByName(group);
-        groupListInfoDto.setId(groupN.getId());
-        groupListInfoDto.setName(groupN.getName());
-        User head = userRepository.getByUsername(groupN.getHead().getUsername());
-        if (head != null){
-            groupListInfoDto.setHeadFullName(head.getLastname() + " "
-                    + head.getFirstname() + " "
-                    + head.getMidname());
-        }
-        return groupListInfoDto;
-    }
-
-    @Override
     public List<GroupListInfoDto> findAll() {
         List<Groups> groups = groupRepository.findAll();
         List<GroupListInfoDto> groupListInfoDtos = new ArrayList<>();
