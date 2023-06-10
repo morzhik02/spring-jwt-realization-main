@@ -46,6 +46,10 @@ public class DocSpec {
         return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.manager).get(User.Fields.username), managerLogin);
     }
 
+    public Specification<Doc> facultyFilter(String facultyId) {
+        return (r, cq, cb) -> cb.equal(r.get(Doc.Fields.user).get(User.Fields.faculty), facultyId);
+    }
+
     public Specification<Doc> dateFilter(Date dateFrom, Date dateTo) {
         return (r, cq, cb) -> cb.and(cb.greaterThanOrEqualTo(r.get(Doc.Fields.createdAt), dateFrom),
                 cb.lessThan(r.get(Doc.Fields.createdAt), DateUtils.addDays(dateTo, 1)));

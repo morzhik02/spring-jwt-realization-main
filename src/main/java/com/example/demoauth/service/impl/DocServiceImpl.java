@@ -189,7 +189,10 @@ public class DocServiceImpl implements DocService {
             docInfoDto.setCreated(doc.getCreatedDate().format(formatterCreated));
             DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
             docInfoDto.setCreatedTime(doc.getCreatedDate().format(formatterCreatedTime));
-            docInfoDtos.add(docInfoDto);
+            if(user.getGroup().getName().equals(student.getFaculty().getName())){
+                docInfoDtos.add(docInfoDto);
+            }
+
         }
         return docInfoDtos;
     }
