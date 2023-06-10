@@ -6,10 +6,14 @@ import com.example.demoauth.models.entity.User;
 import com.example.demoauth.repository.NotificationRepository;
 import com.example.demoauth.service.NotificationService;
 import com.example.demoauth.utils.JwtUtil;
+import com.example.demoauth.utils.specification.NotificationSpec;
+import com.example.demoauth.utils.specification.SpecificationBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +32,9 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional(readOnly = true)
     public List<MsgInfoDto> getAll() {
-        List<Notification> notifications = notificationRepository.findAll();
+        Specification<Notification> notificationSpec = new SpecificationBuilder<>();
+        notificationSpec.and(NotificationSpec.docOrderByCreatedDate());
+        List<Notification> notifications = notificationRepository.findAll((Sort) notificationSpec);
         List<MsgInfoDto> msgInfoDtos = new ArrayList<>();
         for(Notification notification : notifications){
             String username = JwtUtil.getUsername();
