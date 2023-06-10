@@ -370,7 +370,7 @@ public class DocServiceImpl implements DocService {
                             "\n" +
                             "Ваше обращения №" + docId + " взято в работу. Ответсвенный: " + managerFullName +
                             "\n" + "\n" +
-                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно.\n" +
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send in progress message to " + studentEmail);
@@ -388,10 +388,9 @@ public class DocServiceImpl implements DocService {
                     "Рассмотрение Вашего обращения №" + docId + " завершено",
                     "Добрый день!\n" +
                             "\n" +
-                            "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
-                            //"Скачать его можно будет в разделе Архив заявок" +
+                            "Рассмотрение Вашего обращения №" + docId + " завершено. Можете забрать документ в деканате." +
                             "\n" + "\n" +
-                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно.\n" +
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
@@ -430,15 +429,15 @@ public class DocServiceImpl implements DocService {
                     "Смена статуса Вашего обращения №" + docId,
                     "Добрый день!\n" +
                             "\n" +
-                            "Рассмотрение Вашего обращения №" + docId + " завершено\n" +
-                            "Запрос отколенен" +
+                            "Рассмотрение Вашего обращения №" + docId + " завершено.\n" +
+                            "Запрос отколенен." +
                             "\n" + "\n" +
-                            "Это письмо создано автоматически. Отвечать на него не нужно\n" +
+                            "Это письмо создано автоматически. Отвечать на него не нужно.\n" +
                             "\n" +
                             "С уважением, Ваш университет");
             log.info("Send closed message to " + studentEmail);
             Notification notification = new Notification();
-            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено. Можете забрать документ в деканате.");
+            notification.setMessage("Рассмотрение Вашего обращения №" + docId + " завершено.");
             notification.setUser(doc.getUser());
             notification.setCreatedDate(LocalDateTime.now());
             notificationRepository.save(notification);
