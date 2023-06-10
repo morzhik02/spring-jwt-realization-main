@@ -38,14 +38,12 @@ public class NotificationServiceImpl implements NotificationService {
         List<MsgInfoDto> msgInfoDtos = new ArrayList<>();
         for(Notification notification : notifications){
             String username = JwtUtil.getUsername();
-           // if(Objects.equals(notification.getUser().getUsername(), username)) {
                 MsgInfoDto msgInfoDto = new MsgInfoDto();
                 msgInfoDto.setUsername(notification.getUser().getUsername());
                 msgInfoDto.setMessage(notification.getMessage());
                 DateTimeFormatter formatterCreatedTime = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
                 msgInfoDto.setCreatedTime(notification.getCreatedDate().format(formatterCreatedTime));
                 msgInfoDtos.add(msgInfoDto);
-           // }
         }
 
         return msgInfoDtos;

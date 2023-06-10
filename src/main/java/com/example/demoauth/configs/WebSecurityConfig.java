@@ -48,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 	private static final String[] SWAGGER_URLS = {
-			// -- swagger ui
 			"/swagger-ui/**",
 			"/api/v1/api-docs/**",
 			"/api/auth/signin",
@@ -74,7 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/test/**").permitAll()
 				.antMatchers("/**").permitAll()
 				.antMatchers(SWAGGER_URLS).permitAll()
-					//.antMatchers().access("hasAnyRole('ROLE_ADMIN', 'ROLE_DISTRICT_POLICEMAN', 'ROLE_PROSECUTOR')")
 					.anyRequest().authenticated();
 		
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

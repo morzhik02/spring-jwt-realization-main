@@ -35,13 +35,6 @@ public class UserController {
         return ResponseEntity.ok(userService.findByUsername(username));
     }
 
-//    @GetMapping("/me")
-//    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-//    @Operation(summary = "Method to get my user profile")
-//    public ResponseEntity<Optional<User>> getMyUserInfo() {
-//        return ResponseEntity.ok(userService.myUserProfile());
-//    }
-
     @GetMapping("/me")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get my user profile")

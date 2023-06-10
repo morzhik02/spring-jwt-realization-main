@@ -52,10 +52,6 @@ public class User extends BaseEntity{
 	@JoinColumn(name = "group_id")
 	Groups group;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "head_id")
-//	User head;
-
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",
 			joinColumns = @JoinColumn(name = "user_id"),

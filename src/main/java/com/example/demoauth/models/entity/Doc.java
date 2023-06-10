@@ -1,6 +1,5 @@
 package com.example.demoauth.models.entity;
 
-import com.example.demoauth.models.enums.CategoryCode;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.FieldNameConstants;
@@ -20,7 +19,6 @@ import java.time.LocalDateTime;
 @FieldNameConstants
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Doc extends BaseEntity{
-    //String number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")

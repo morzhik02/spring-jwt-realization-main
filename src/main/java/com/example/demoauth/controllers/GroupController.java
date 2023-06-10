@@ -25,13 +25,6 @@ import java.util.List;
 public class GroupController {
     GroupService groupService;
 
-//    @GetMapping(name = "/groupname")
-//    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ADMIN')")
-//    @Operation(summary = "Method to get group")
-//    public ResponseEntity<GroupListInfoDto> findAllByGroup(@RequestParam String groupName) {
-//        return ResponseEntity.ok(groupService.findAllByGroup(groupName));
-//    }
-
     @GetMapping()
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ADMIN')")
     @Operation(summary = "Method to get groups list")

@@ -10,9 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DocRepository extends JpaRepository<Doc, Long>, JpaSpecificationExecutor<Doc> {
-//    Page<Doc> findAllByUser(User user, Pageable pageable);
 
-//    Page<Post> findAllByDistrict(District district, Pageable pageable);
-//
-//    Page<Post> findAllByCity(City city, Pageable pageable);
 }
