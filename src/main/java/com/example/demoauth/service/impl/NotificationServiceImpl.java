@@ -34,7 +34,7 @@ public class NotificationServiceImpl implements NotificationService {
     public List<MsgInfoDto> getAll() {
         Specification<Notification> notificationSpec = new SpecificationBuilder<>();
         notificationSpec.and(NotificationSpec.docOrderByCreatedDate());
-        List<Notification> notifications = notificationRepository.findAll((Sort) notificationSpec);
+        List<Notification> notifications = notificationRepository.findAll();
         List<MsgInfoDto> msgInfoDtos = new ArrayList<>();
         for(Notification notification : notifications){
             String username = JwtUtil.getUsername();
